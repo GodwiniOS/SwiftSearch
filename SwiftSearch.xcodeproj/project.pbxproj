@@ -94,6 +94,10 @@
 		5A8BB549275B9B9D00813666 /* SwiftSearch */ = {
 			isa = PBXGroup;
 			children = (
+				5A8BB577275B9C6F00813666 /* Extension */,
+				5A8BB576275B9C6500813666 /* View */,
+				5A8BB575275B9C5E00813666 /* ViewModel */,
+				5A8BB574275B9C5600813666 /* Model */,
 				5A8BB54A275B9B9D00813666 /* SwiftSearchApp.swift */,
 				5A8BB54C275B9B9D00813666 /* ContentView.swift */,
 				5A8BB54E275B9B9F00813666 /* Assets.xcassets */,
@@ -125,6 +129,34 @@
 				5A8BB567275B9B9F00813666 /* SwiftSearchUITestsLaunchTests.swift */,
 			);
 			path = SwiftSearchUITests;
+			sourceTree = "<group>";
+		};
+		5A8BB574275B9C5600813666 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A8BB575275B9C5E00813666 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5A8BB576275B9C6500813666 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A8BB577275B9C6F00813666 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -436,7 +468,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -465,7 +497,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
