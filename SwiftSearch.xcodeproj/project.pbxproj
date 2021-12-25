@@ -121,8 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				5A447875276F77B70000B8EE /* Home */,
-				5A447881276F77B70000B8EE /* Components */,
 				5A44788C276F77B70000B8EE /* Detail */,
+				5A447881276F77B70000B8EE /* Custom */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -136,23 +136,15 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		5A447881276F77B70000B8EE /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				5A447886276F77B70000B8EE /* CurrencyImage */,
-				5A447882276F77B70000B8EE /* StatisticView.swift */,
-				5A44788A276F77B70000B8EE /* SearchBarView.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		5A447886276F77B70000B8EE /* CurrencyImage */ = {
+		5A447881276F77B70000B8EE /* Custom */ = {
 			isa = PBXGroup;
 			children = (
 				5A447887276F77B70000B8EE /* CurrencyLogoView.swift */,
 				5A447889276F77B70000B8EE /* CurrencyImageView.swift */,
+				5A447882276F77B70000B8EE /* StatisticView.swift */,
+				5A44788A276F77B70000B8EE /* SearchBarView.swift */,
 			);
-			path = CurrencyImage;
+			path = Custom;
 			sourceTree = "<group>";
 		};
 		5A44788C276F77B70000B8EE /* Detail */ = {

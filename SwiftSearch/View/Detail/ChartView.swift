@@ -48,7 +48,6 @@ struct ChartView: View {
                 }
             }
         }
-        
     }
 }
 
