@@ -17,7 +17,7 @@ class HomeViewModel: ObservableObject {
     @Published var searchText: String = ""
         
     private let currencyProvider = CurrencyProvider()
-    private let marketProvider = MarketProvider()
+    private let marketProvider = CurrencyProvider()
     private var cancellables = Set<AnyCancellable>()
     
 

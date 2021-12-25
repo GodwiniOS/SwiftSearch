@@ -17,12 +17,12 @@ class DetailViewModel: ObservableObject {
     @Published var redditURL: String? = nil
 
     @Published var currency: CurrencyModel
-    private let currencyDetailProvider: CurrencyDetailProvider
+    private let currencyDetailProvider: CurrencyProvider
     private var cancellables = Set<AnyCancellable>()
     
     init(currency: CurrencyModel) {
         self.currency = currency
-        self.currencyDetailProvider = CurrencyDetailProvider(currency: currency)
+        self.currencyDetailProvider = CurrencyProvider(currency: currency)
         self.addSubscribers()
     }
     
