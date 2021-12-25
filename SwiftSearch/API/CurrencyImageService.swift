@@ -1,5 +1,5 @@
 //
-//  CoinImageService.swift
+//  CurrencyImageProvider.swift
 //  SwiftSearch
 //
 //  Created by Godwin A on 5/9/21.
@@ -9,23 +9,23 @@ import Foundation
 import SwiftUI
 import Combine
 
-class CoinImageService {
+class CurrencyImageProvider {
     
     @Published var image: UIImage? = nil
     
     private var imageSubscription: AnyCancellable?
-    private let coin: CoinModel
-    private let folderName = "coin_images"
+    private let currency: CurrencyModel
+    private let folderName = "currency_images"
     private let imageName: String
     
-    init(coin: CoinModel) {
-        self.coin = coin
-        self.imageName = coin.id
-        downloadCoinImage()
+    init(currency: CurrencyModel) {
+        self.currency = currency
+        self.imageName = currency.id
+        downloadCurrencyImage()
     }
     
-    private func downloadCoinImage() {
-        guard let url = URL(string: coin.image) else { return }
+    private func downloadCurrencyImage() {
+        guard let url = URL(string: currency.image) else { return }
         
         imageSubscription = NetworkingManager.download(url: url)
             .tryMap({ (data) -> UIImage? in

@@ -8,7 +8,7 @@
 import Foundation
 
 
-// URL: https:api.coingecko.com/api/v3/global
+// URL: https:api.currencygecko.com/api/v3/global
  
 struct GlobalData: Codable {
     let data: MarketDataModel?

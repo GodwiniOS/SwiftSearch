@@ -1,5 +1,5 @@
 //
-//  CoinDetailModel.swift
+//  CurrencyDetailModel.swift
 //  SwiftSearch
 //
 //  Created by Godwin A on 5/11/21.
@@ -8,12 +8,12 @@
 import Foundation
 
 // JSON Data
-// https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false
+// https://api.currencygecko.com/api/v3/currencys/bitcurrency?localization=false&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false
 
 
 
 
-struct CoinDetailModel: Codable {
+struct CurrencyDetailModel: Codable {
     let id, symbol, name: String?
     let blockTimeInMinutes: Int?
     let hashingAlgorithm: String?

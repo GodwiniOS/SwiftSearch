@@ -1,5 +1,5 @@
 //
-//  CoinLogoView.swift
+//  CurrencyLogoView.swift
 //  SwiftSearch
 //
 //  Created by Godwin A on 5/9/21.
@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-struct CoinLogoView: View {
+struct CurrencyLogoView: View {
     
-    let coin: CoinModel
+    let currency: CurrencyModel
     
     var body: some View {
         VStack {
-            CoinImageView(coin: coin)
+            CurrencyImageView(currency: currency)
                 .frame(width: 50, height: 50)
-            Text(coin.symbol.uppercased())
+            Text(currency.symbol.uppercased())
                 .font(.headline)
                 .foregroundColor(Color.theme.accent)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
-            Text(coin.name)
+            Text(currency.name)
                 .font(.caption)
                 .foregroundColor(Color.theme.secondaryText)
                 .lineLimit(2)

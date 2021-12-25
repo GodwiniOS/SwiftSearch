@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @EnvironmentObject private var vm: HomeViewModel
-    @State private var selectedCoin: CoinModel? = nil
+    @State private var selectedCurrency: CurrencyModel? = nil
     @State private var showDetailView: Bool = false
     @State private var showPortfolio: Bool = false // animate right
 
@@ -24,13 +24,13 @@ struct HomeView: View {
                 columnTitles
                 
                 if !showPortfolio {
-                    allCoinsList
+                    allCurrencysList
                         .transition(.move(edge: .leading))
                 }
                 
                 if showPortfolio {
                     ZStack(alignment: .top) {
-                            portfolioCoinsList
+                            portfolioCurrencysList
                     }
                     .transition(.move(edge: .trailing))
                 }
@@ -40,7 +40,7 @@ struct HomeView: View {
         }
         .background(
             NavigationLink(
-                destination: DetailLoadingView(coin: $selectedCoin),
+                destination: DetailLoadingView(currency: $selectedCurrency),
                 isActive: $showDetailView,
                 label: { EmptyView() })
         )
@@ -51,26 +51,26 @@ struct HomeView: View {
 
 extension HomeView {
     
-    private var portfolioCoinsList: some View {
+    private var portfolioCurrencysList: some View {
         List {
-            ForEach(vm.portfolioCoins) { coin in
-                CoinRowView(coin: coin, showHoldingsColumn: true)
+            ForEach(vm.portfolioCurrencys) { currency in
+                CurrencyRowView(currency: currency, showHoldingsColumn: true)
                     .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
                     .onTapGesture {
-                        segue(coin: coin)
+                        segue(currency: currency)
                     }
                     .listRowBackground(Color.theme.background)
             }
         }
         .listStyle(PlainListStyle())
     }
-    private var allCoinsList: some View {
+    private var allCurrencysList: some View {
         List {
-            ForEach(vm.allCoins) { coin in
-                CoinRowView(coin: coin, showHoldingsColumn: false)
+            ForEach(vm.allCurrencys) { currency in
+                CurrencyRowView(currency: currency, showHoldingsColumn: false)
                     .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
                     .onTapGesture {
-                        segue(coin: coin)
+                        segue(currency: currency)
                     }
                     .listRowBackground(Color.theme.background)
             }
@@ -80,8 +80,8 @@ extension HomeView {
     
     
     
-    private func segue(coin: CoinModel) {
-        selectedCoin = coin
+    private func segue(currency: CurrencyModel) {
+        selectedCurrency = currency
         showDetailView.toggle()
     }
     

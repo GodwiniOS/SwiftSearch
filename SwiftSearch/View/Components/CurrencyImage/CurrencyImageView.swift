@@ -1,5 +1,5 @@
 //
-//  CoinImageView.swift
+//  CurrencyImageView.swift
 //  SwiftSearch
 //
 //  Created by Godwin A on 5/9/21.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct CoinImageView: View {
+struct CurrencyImageView: View {
     
-    @StateObject var vm: CoinImageViewModel
+    @StateObject var vm: CurrencyImageViewModel
     
-    init(coin: CoinModel) {
-        _vm = StateObject(wrappedValue: CoinImageViewModel(coin: coin))
+    init(currency: CurrencyModel) {
+        _vm = StateObject(wrappedValue: CurrencyImageViewModel(currency: currency))
     }
     
     var body: some View {

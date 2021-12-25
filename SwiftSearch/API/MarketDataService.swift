@@ -1,5 +1,5 @@
 //
-//  MarketDataService.swift
+//  MarketProvider.swift
 //  SwiftSearch
 //
 //  Created by Godwin A on 5/9/21.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class MarketDataService {
+class MarketProvider {
     
     @Published var marketData: MarketDataModel? = nil
     var marketDataSubscription: AnyCancellable?

@@ -9,12 +9,12 @@ import SwiftUI
 
 struct DetailLoadingView: View {
     
-    @Binding var coin: CoinModel?
+    @Binding var currency: CurrencyModel?
 
     var body: some View {
         ZStack {
-            if let coin = coin {
-                DetailView(coin: coin)
+            if let currency = currency {
+                DetailView(currency: currency)
             }
         }
     }
@@ -31,14 +31,14 @@ struct DetailView: View {
     ]
     private let spacing: CGFloat = 30
     
-    init(coin: CoinModel) {
-        _vm = StateObject(wrappedValue: DetailViewModel(coin: coin))
+    init(currency: CurrencyModel) {
+        _vm = StateObject(wrappedValue: DetailViewModel(currency: currency))
     }
     
     var body: some View {
         ScrollView {
             VStack {
-                ChartView(coin: vm.coin)
+                ChartView(currency: vm.currency)
                     .padding(.vertical)
 
                 VStack(spacing: 20) {
@@ -49,7 +49,7 @@ struct DetailView: View {
                     additionalTitle
                     Divider()
                     additionalGrid
-                    websiteSection
+//                    websiteSection
                 }
                 .padding()
             }
@@ -58,7 +58,7 @@ struct DetailView: View {
             Color.theme.background
                 .ignoresSafeArea()
         )
-        .navigationTitle(vm.coin.name)
+        .navigationTitle(vm.currency.name)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 navigationBarTrailingItems
@@ -71,10 +71,10 @@ extension DetailView {
     
     private var navigationBarTrailingItems: some View {
         HStack {
-            Text(vm.coin.symbol.uppercased())
+            Text(vm.currency.symbol.uppercased())
                 .font(.headline)
                 .foregroundColor(Color.theme.secondaryText)
-            CoinImageView(coin: vm.coin)
+            CurrencyImageView(currency: vm.currency)
                 .frame(width: 25, height: 25)
         }
     }
@@ -97,10 +97,10 @@ extension DetailView {
     
     private var descriptionSection: some View {
         ZStack {
-            if let coinDescription = vm.coinDescription,
-               !coinDescription.isEmpty {
+            if let currencyDescription = vm.currencyDescription,
+               !currencyDescription.isEmpty {
                 VStack(alignment: .leading) {
-                    Text(coinDescription)
+                    Text(currencyDescription)
                         .lineLimit(showFullDescription ? nil : 3)
                         .font(.callout)
                         .foregroundColor(Color.theme.secondaryText)
@@ -148,22 +148,22 @@ extension DetailView {
         })
     }
     
-    private var websiteSection: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            if let websiteString = vm.websiteURL,
-               let url = URL(string: websiteString) {
-                Link("Website", destination: url)
-            }
-            
-            if let redditString = vm.redditURL,
-               let url = URL(string: redditString) {
-                Link("Reddit", destination: url)
-            }
-            
-        }
-        .accentColor(.blue)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .font(.headline)
-    }
+//    private var websiteSection: some View {
+//        VStack(alignment: .leading, spacing: 20) {
+//            if let websiteString = vm.websiteURL,
+//               let url = URL(string: websiteString) {
+//                Link("Website", destination: url)
+//            }
+//
+//            if let redditString = vm.redditURL,
+//               let url = URL(string: redditString) {
+//                Link("Reddit", destination: url)
+//            }
+//
+//        }
+//        .accentColor(.blue)
+//        .frame(maxWidth: .infinity, alignment: .leading)
+//        .font(.headline)
+//    }
     
 }

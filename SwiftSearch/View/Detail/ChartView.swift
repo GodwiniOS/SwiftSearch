@@ -17,15 +17,15 @@ struct ChartView: View {
     private let endingDate: Date
     @State private var percentage: CGFloat = 0
     
-    init(coin: CoinModel) {
-        data = coin.sparklineIn7D?.price ?? []
+    init(currency: CurrencyModel) {
+        data = currency.sparklineIn7D?.price ?? []
         maxY = data.max() ?? 0
         minY = data.min() ?? 0
         
         let priceChange = (data.last ?? 0) - (data.first ?? 0)
         lineColor = priceChange > 0 ? Color.theme.green : Color.theme.red
         
-        endingDate = Date(coinGeckoString: coin.lastUpdated ?? "")
+        endingDate = Date(currencyGeckoString: currency.lastUpdated ?? "")
         startingDate = endingDate.addingTimeInterval(-7*24*60*60)
     }
     

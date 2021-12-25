@@ -11,13 +11,13 @@ import Combine
 class HomeViewModel: ObservableObject {
     
     @Published var statistics: [StatisticModel] = []
-    @Published var allCoins: [CoinModel] = []
-    @Published var portfolioCoins: [CoinModel] = []
+    @Published var allCurrencys: [CurrencyModel] = []
+    @Published var portfolioCurrencys: [CurrencyModel] = []
     @Published var isLoading: Bool = false
     @Published var searchText: String = ""
         
-    private let coinDataService = CoinDataService()
-    private let marketDataService = MarketDataService()
+    private let currencyProvider = CurrencyProvider()
+    private let marketProvider = MarketProvider()
     private var cancellables = Set<AnyCancellable>()
     
 
@@ -27,20 +27,20 @@ class HomeViewModel: ObservableObject {
     
     func addSubscribers() {
         
-        // updates allCoins
+        // updates allCurrencys
         $searchText
-            .combineLatest(coinDataService.$allCoins)
+            .combineLatest(currencyProvider.$allCurrencys)
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
-            .map(filterAndSortCoins)
-            .sink { [weak self] (returnedCoins) in
-                self?.allCoins = returnedCoins
+            .map(filterAndSortCurrencys)
+            .sink { [weak self] (returnedCurrencys) in
+                self?.allCurrencys = returnedCurrencys
             }
             .store(in: &cancellables)
         
         
         // updates marketData
-        marketDataService.$marketData
-            .combineLatest($portfolioCoins)
+        marketProvider.$marketData
+            .combineLatest($portfolioCurrencys)
             .map(mapGlobalMarketData)
             .sink { [weak self] (returnedStats) in
                 self?.statistics = returnedStats
@@ -52,29 +52,29 @@ class HomeViewModel: ObservableObject {
     
     func reloadData() {
         isLoading = true
-        coinDataService.getCoins()
-        marketDataService.getData()
+        currencyProvider.getCurrencys()
+        marketProvider.getData()
     }
     
-    private func filterAndSortCoins(text: String, coins: [CoinModel]) -> [CoinModel] {
-        return filterCoins(text: text, coins: coins)
+    private func filterAndSortCurrencys(text: String, currencys: [CurrencyModel]) -> [CurrencyModel] {
+        return filterCurrencys(text: text, currencys: currencys)
     }
 
-    private func filterCoins(text: String, coins: [CoinModel]) -> [CoinModel] {
+    private func filterCurrencys(text: String, currencys: [CurrencyModel]) -> [CurrencyModel] {
         guard !text.isEmpty else {
-            return coins
+            return currencys
         }
         
         let lowercasedText = text.lowercased()
         
-        return coins.filter { (coin) -> Bool in
-            return coin.name.lowercased().contains(lowercasedText) ||
-                    coin.symbol.lowercased().contains(lowercasedText) ||
-                    coin.id.lowercased().contains(lowercasedText)
+        return currencys.filter { (currency) -> Bool in
+            return currency.name.lowercased().contains(lowercasedText) ||
+                    currency.symbol.lowercased().contains(lowercasedText) ||
+                    currency.id.lowercased().contains(lowercasedText)
         }
     }
     
-    private func mapGlobalMarketData(marketDataModel: MarketDataModel?, portfolioCoins: [CoinModel]) -> [StatisticModel] {
+    private func mapGlobalMarketData(marketDataModel: MarketDataModel?, portfolioCurrencys: [CurrencyModel]) -> [StatisticModel] {
         var stats: [StatisticModel] = []
     
         guard let data = marketDataModel else {
@@ -86,15 +86,15 @@ class HomeViewModel: ObservableObject {
         let btcDominance = StatisticModel(title: "BTC Dominance", value: data.btcDominance)
         
         let portfolioValue =
-            portfolioCoins
+            portfolioCurrencys
                 .map({ $0.currentHoldingsValue })
                 .reduce(0, +)
         
         let previousValue =
-            portfolioCoins
-                .map { (coin) -> Double in
-                    let currentValue = coin.currentHoldingsValue
-                    let percentChange = coin.priceChangePercentage24H ?? 0 / 100
+            portfolioCurrencys
+                .map { (currency) -> Double in
+                    let currentValue = currency.currentHoldingsValue
+                    let percentChange = currency.priceChangePercentage24H ?? 0 / 100
                     let previousValue = currentValue / (1 + percentChange)
                     return previousValue
                 }

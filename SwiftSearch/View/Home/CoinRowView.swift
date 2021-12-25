@@ -1,5 +1,5 @@
 //
-//  CoinRowView.swift
+//  CurrencyRowView.swift
 //  SwiftSearch
 //
 //  Created by Godwin A on 5/8/21.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct CoinRowView: View {
+struct CurrencyRowView: View {
         
-    let coin: CoinModel
+    let currency: CurrencyModel
     let showHoldingsColumn: Bool
     
     var body: some View {
@@ -27,17 +27,17 @@ struct CoinRowView: View {
         )
     }
 }
-extension CoinRowView {
+extension CurrencyRowView {
     
     private var leftColumn: some View {
         HStack(spacing: 0) {
-            Text("\(coin.rank)")
+            Text("\(currency.rank)")
                 .font(.caption)
                 .foregroundColor(Color.theme.secondaryText)
                 .frame(minWidth: 30)
-            CoinImageView(coin: coin)
+            CurrencyImageView(currency: currency)
                 .frame(width: 30, height: 30)
-            Text(coin.symbol.uppercased())
+            Text(currency.symbol.uppercased())
                 .font(.headline)
                 .padding(.leading, 6)
                 .foregroundColor(Color.theme.accent)
@@ -46,21 +46,21 @@ extension CoinRowView {
     
     private var centerColumn: some View {
         VStack(alignment: .trailing) {
-            Text(coin.currentHoldingsValue.asCurrencyWith2Decimals())
+            Text(currency.currentHoldingsValue.asCurrencyWith2Decimals())
                 .bold()
-            Text((coin.currentHoldings ?? 0).asNumberString())
+            Text((currency.currentHoldings ?? 0).asNumberString())
         }
         .foregroundColor(Color.theme.accent)
     }
     
     private var rightColumn: some View {
         VStack(alignment: .trailing) {
-            Text(coin.currentPrice.asCurrencyWith6Decimals())
+            Text(currency.currentPrice.asCurrencyWith6Decimals())
                 .bold()
                 .foregroundColor(Color.theme.accent)
-            Text(coin.priceChangePercentage24H?.asPercentString() ?? "")
+            Text(currency.priceChangePercentage24H?.asPercentString() ?? "")
                 .foregroundColor(
-                    (coin.priceChangePercentage24H ?? 0 >= 0) ?
+                    (currency.priceChangePercentage24H ?? 0 >= 0) ?
                     Color.theme.green :
                     Color.theme.red
                 )
